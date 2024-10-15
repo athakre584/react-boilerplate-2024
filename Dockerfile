@@ -1,0 +1,26 @@
+FROM node:20.15.1
+
+RUN npm install --prefix /usr/lib/  && mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
+
+ARG BUILD_DISPLAY_NAME
+ARG GIT_BRANCH
+ARG GIT_COMMIT
+ARG PUBLIC_ENVIRONMENT
+
+ENV BUILD_DISPLAY_NAME=$BUILD_DISPLAY_NAME
+ENV GIT_BRANCH=$GIT_BRANCH
+ENV GIT_COMMIT=$GIT_COMMIT
+ENV PUBLIC_ENVIRONMENT=$PUBLIC_ENVIRONMENT
+
+COPY . /usr/src/app
+COPY .envs/$PUBLIC_ENVIRONMENT.env.production /usr/src/app/.env.production
+
+RUN npm -v
+RUN node -v
+RUN npm ci
+
+EXPOSE 3000
+
+RUN npm run build
