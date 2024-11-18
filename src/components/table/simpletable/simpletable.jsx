@@ -15,6 +15,7 @@ const SimpleTable = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [editingRow, setEditingRow] = useState(null);
   const [newRow, setNewRow] = useState({});
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   // Filter rows based on search term
   const filteredData = data.filter((row) => {
@@ -24,7 +25,23 @@ const SimpleTable = ({
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
     });
+  }).sort((a, b) => {
+    if (!sortConfig.key) return 0;
+    const aVal = a[sortConfig.key];
+    const bVal = b[sortConfig.key];
+    if (aVal < bVal) return sortConfig.direction === 'asc' ? -1 : 1;
+    if (aVal > bVal) return sortConfig.direction === 'asc' ? 1 : -1;
+    return 0;
   });
+
+  const handleSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
 
   // Handle adding a new row
   const handleAddRow = () => {
@@ -56,15 +73,7 @@ const SimpleTable = ({
   };
 
   // Handle input change for adding/editing
-  const handleInputChange = (e, key, rowIndex = null) => {
-    const { value } = e.target;
-    if (rowIndex === null) {
-      setNewRow({ ...newRow, [key]: value });
-    } else {
-      const updatedRow = { ...data[rowIndex], [key]: value };
-      handleEditRow(rowIndex, updatedRow);
-    }
-  };
+  
 
   return (
     <div className={className}>
@@ -89,20 +98,8 @@ const SimpleTable = ({
         )}
       </div>
 
-      {/* Add Row */}
-      <div className={styles.addRow}>
-        {columns.map((column) => (
-          <input
-            key={column.key}
-            onChange={(e) => handleInputChange(e, column.key)}
-            placeholder={`Enter ${column.label}`}
-            value={newRow[column.key] || ""}
-          />
-        ))}
-        <button className={styles.addButton} onClick={handleAddRow}>
-          Add Row
-        </button>
-      </div>
+     
+      
 
       {/* Table */}
       <table className={styles.table}>
@@ -112,7 +109,12 @@ const SimpleTable = ({
               <input disabled type="checkbox" />
             </th>
             {columns.map((column) => (
-              <th key={column.key}>{column.label}</th>
+              <th key={column.key} onClick={() => handleSort(column.key)}>
+              {column.label}
+              {sortConfig.key === column.key ? (
+                sortConfig.direction === 'asc' ? ' ▲' : ' ▼'
+              ) : null}
+            </th>
             ))}
             {actions && <th>Actions</th>}
           </tr>
@@ -129,7 +131,7 @@ const SimpleTable = ({
               </td>
 
               {columns.map((column) => (
-                <td key={row.id}>
+                <td key={`${row.id}-${column.key}`}>
                   {editingRow === row.id ? (
                     <input
                       onChange={(e) => handleInputChange(e, column.key, row.id)}
@@ -189,12 +191,6 @@ SimpleTable.propTypes = {
   ).isRequired,
   initialData: PropTypes.arrayOf(PropTypes.object).isRequired,
   onRowClick: PropTypes.func,
-};
-
-SimpleTable.defaultProps = {
-  actions: null,
-  className: "",
-  onRowClick: null,
 };
 
 export default SimpleTable;

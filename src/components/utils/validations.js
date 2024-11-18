@@ -5,9 +5,12 @@ export const NAME_REGEX = new RegExp(
   "u"
 );
 
-export const ColorsSchema = () => {
+export const FormSampleSchema = () => {
   return z.object({
-    "Color Name": z.string().min(2).trim().regex(NAME_REGEX),
-    Status: z.string(),
+    "name": z.string().min(2).trim().regex(NAME_REGEX),
+    "email":z.string().email(),
+    "phone":z.string()
+      .regex(/^\d{10}$/, { message: "Phone number must be exactly 10 digits" }),
+    'status': z.string(),
   });
 };
