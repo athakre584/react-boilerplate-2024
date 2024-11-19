@@ -3,11 +3,12 @@ module.exports = {
     enable: false, // Disable ESLint errors in the build process
   },
   jest: {
-    configure: {
-      roots: ["<rootDir>/src"], // Look for test files inside the `src` directory
-      testMatch: [
-        "<rootDir>/src/**/*.test.js", // Customize as per your test structure
-      ],
+    configure: (jestConfig) => {
+      jestConfig.testMatch = [
+        "**/__tests__/**/*.{js,jsx,ts,tsx}",
+        "**/?(*.)+(spec|test).{js,jsx,ts,tsx}",
+      ];
+      return jestConfig;
     },
   },
   module: {
