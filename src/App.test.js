@@ -1,9 +1,19 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
+import App from './App';
+import React from 'react';
 
-import App from "./App";
+// Mock the AppRoutes component to simplify testing
+jest.mock('./routes', () => {
+  const MockedRoutes = () => <div>Mocked App Routes</div>;
+  MockedRoutes.displayName = 'MockedRoutes'; // Add display name
+  return MockedRoutes;
+});
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App Component', () => {
+  test('renders App component without crashing', () => {
+    render(<App />);
+
+    // Check if the mocked routes are rendered
+    expect(screen.getByText('Mocked App Routes')).toBeInTheDocument();
+  });
 });

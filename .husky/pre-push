@@ -1,2 +1,2 @@
 echo "Running tests before push..."
-npm test
+npm test || exit 1
