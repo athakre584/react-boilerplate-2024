@@ -15,7 +15,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test:coverage": "react-scripts test --coverage",
+    "eject": "react-scripts eject",
+    "prepare": "husky",
+    "format": "prettier -c  src",
+    "format:fix": "prettier -w  src",
+    "lint": "eslint .",
+    "lint:errors": "eslint . --quiet",
+    "lint:css": "stylelint '**/*.{css,scss}'",
+    "lint:fix:css": "stylelint '**/*.{css,scss}' --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +42,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-scss": "^6.10.0"
   }
 }

@@ -1,0 +1,44 @@
+@import 'variables';
+
+// Grid override.
+
+$grid-columns: 16;
+$grid-gutter-width: 24px;
+$body-bg: $bg_color;
+$body-color: #333;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 320px,
+  md: 651px,
+  mdlg: 1023px,
+  lg: 1024px,
+  lg-2: 1200px,
+  qhd: 1440px,
+  xl: 1601px,
+  wqhd: 2560px,
+);
+
+// Container overrides.
+$container-max-widths: (
+  sm: 486px,
+  md: 768px,
+  mdlg: 1023px,
+  lg: 1192px,
+  xl: 1448px,
+);
+
+// Bootstrap and its default variables/
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+.container-fluid {
+  inline-size: 100%;
+  margin-inline: auto;
+  padding-inline: 0 !important;
+}
+
+.page-white {
+  background-color: $white;
+  color: $black;
+}

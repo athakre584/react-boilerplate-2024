@@ -1,0 +1,10 @@
+# Ignore build output
+build/
+dist/
+
+# Ignore node modules
+node_modules/
+
+# Ignore specific files
+src/someFileToIgnore.js
+src/**/*.test.js

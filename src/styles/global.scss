@@ -1,0 +1,60 @@
+@use 'breakpoints';
+@use 'colors';
+@use 'typography';
+@import 'custom';
+@import 'bootstrap/scss/bootstrap';
+
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+  color: colors.$off-black;
+  inline-size: 100%;
+  margin: 0;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+html body {
+  @include typography.body;
+}
+
+button {
+  color: inherit;
+
+  svg {
+    pointer-events: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    &[disabled],
+    &[aria-disabled='true'] {
+      cursor: not-allowed;
+    }
+  }
+}
+
+img {
+  max-inline-size: 100%;
+}
+
+@media (width < breakpoints.$lg) {
+  body[data-has-open-nav='true'] {
+    block-size: 100vh;
+    overflow: hidden;
+  }
+}
