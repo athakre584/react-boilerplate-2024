@@ -1,0 +1,112 @@
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    color: #555;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+}
+
+section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  font-size: 2rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+/* Features List Styles */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.2rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  color: #4f6de8;
+}
+
+/* Code Block Styles */
+pre {
+  background-color: #282c34;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+/* Setup Instructions */
+ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+code {
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 1rem !important;
+}
+
+/* Commit Rules & Setup */
+ul li {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+ul li:hover {
+  color: #4f6de8;
+  transform: scale(1.05);
+}
+
+/* Font Setup Section */
+.fonts {
+  background: #e7f1ff;
+}
+
+.sassBootstrap {
+  background: #f2f9e7;
+}
+
+.linting {
+  background: #f4f4f9;
+}
+
+.tests {
+  background: #f7e7f2;
+}
